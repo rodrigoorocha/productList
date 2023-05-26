@@ -1,0 +1,44 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body{
+  height: 100vh;
+}
+
+.app {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
+}
+
+.home .list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px
+}
+
+.home .list .productcard {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  box-shadow: 0 0 3px #aaa;
+  border-radius: 5px;
+
+}
+
+.home .list .productcard button{
+  border: 0;
+  height: 35px;
+  width: 35px;
+  font-size: 22px;
+  font-weight: 500;
+  border-radius: 50%;
+  color: white;
+  background: rgb(94, 94, 124);
+  margin-left: 20px;
+}
