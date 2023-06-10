@@ -1,74 +1,44 @@
-import { useState } from "react"
+import { useContext, useEffect, useMemo, useState } from "react";
+import { ProductContext } from "../contexts/ProductContext";
 
 export function Home() {
+  const { sortedProductList, addProduct, sort, setSort } =
+    useContext(ProductContext);
 
-    const productList = [{
-        name: "prod1",
-        valor: 5.50,
-        id: 1
-    }, {
-        name: "prod2",
-        valor: 5.650,
-        id: 2
-    },
-    {
-        name: "prod3",
-        valor: 532234.50,
-        id: 3
-    },
-    {
-        name: "prod4",
-        valor: 5.40,
-        id: 4
-    },
-    {
-        name: "prod5",
-        valor: 353,
-        id: 5
-    },]
-
-    const [cartList, setCartList] = useState([])
-    console.log(cartList);
-    const addProduct = (product) => {
-        const newCartList = [...cartList]
-        const foundProduct = newCartList.find((item) => item.id == product.id)
-        if (foundProduct) {
-            foundProduct.qtd = foundProduct.qtd + 1
-            setCartList(newCartList)
-        }
-        else {
-            setCartList([...cartList, { ...product, qtd: 1 }])
-        }
-
-
-    }
-
-    return (
-
-        <div className="home">
-            <div className="navbar">
-                <h1>Quantidade de produtos </h1>
-                <div><p>Ordenação</p> <select name="option" id=""></select></div>
-            </div>
-
-            <div className="list">
-                {productList.map((product) => {
-                    const { name, valor } = product
-                    return (
-                        <div className="productcard">
-
-                            <div>
-                                <div className="namecart">{name}</div>
-                                <div className="valorcart">{valor}</div>
-                            </div>
-                            <button onClick={() => addProduct(product)}>+</button>
-
-                        </div>
-                    )
-                })}
-
-            </div>
+  return (
+    <div className="home">
+      <div className="navbar">
+        <h1>Quantidade de produtos </h1>
+        <div>
+          <p>Ordenação</p>
+          <select
+            onChange={(event) => setSort(event.target.value)}
+            valu
+            e={sort}
+            name="option"
+            id=""
+          >
+            <option value="">Selecione</option>
+            <option value="asc">Crescente</option>
+            <option value="desc">Decrescente</option>
+          </select>
         </div>
-    )
-}
+      </div>
 
+      <div className="list">
+        {sortedProductList.map((product) => {
+          const { name, valor } = product;
+          return (
+            <div className="productcard">
+              <div>
+                <div className="namecart">{name}</div>
+                <div className="valorcart">{valor}</div>
+              </div>
+              <button onClick={() => addProduct(product)}>+</button>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+}

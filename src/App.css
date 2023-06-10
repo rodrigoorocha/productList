@@ -1,9 +1,9 @@
-*{
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
-body{
+body {
   height: 100vh;
 }
 
@@ -18,7 +18,7 @@ body{
 .home .list {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 10px
+  gap: 10px;
 }
 
 .home .list .productcard {
@@ -28,10 +28,9 @@ body{
   padding: 10px;
   box-shadow: 0 0 3px #aaa;
   border-radius: 5px;
-
 }
 
-.home .list .productcard button{
+.home .list .productcard button {
   border: 0;
   height: 35px;
   width: 35px;
@@ -41,4 +40,14 @@ body{
   color: white;
   background: rgb(94, 94, 124);
   margin-left: 20px;
+}
+
+.cart .produto {
+  display: flex;
+  width: 350px;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+.cart h2 {
+  margin-bottom: 20px;
 }
