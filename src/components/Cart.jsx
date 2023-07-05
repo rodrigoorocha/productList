@@ -17,7 +17,7 @@ export function Cart() {
     (acc, currentItem) => acc + currentItem.valor * currentItem.qtd,
     0
   );
-
+  //console.log(cartList);
   return (
     <div className="cart">
       <h2>Carrinho</h2>

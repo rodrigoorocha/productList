@@ -51,3 +51,8 @@ body {
 .cart h2 {
   margin-bottom: 20px;
 }
+
+.filtro .caixa-filtro {
+  display: flex;
+  flex-direction: column;
+}

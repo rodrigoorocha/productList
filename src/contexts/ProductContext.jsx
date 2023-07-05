@@ -34,14 +34,23 @@ export function ProductProvider({ children }) {
   const [cartList, setCartList] = useState([]);
   const [sort, setSort] = useState("");
 
+  //                  filter
+  const [filterMin, setFilterMin] = useState();
+  const [filterMax, setFilterMax] = useState(null);
+  const [nome, setNome] = useState("");
+
   const sortedProductList = useMemo(
     () =>
-      [...productList].sort((a, b) => {
+      [...productList].sort((item1, item2) => {
         if (sort) {
           if (sort === "asc") {
-            return a.valor - b.valor;
+            return item1.valor - item2.valor;
+          } else if (sort == "desc") {
+            return item2.valor - item1.valor;
+          } else if (sort === "nome-asc") {
+            return item1.name > item2.name ? 1 : -1;
           } else {
-            return b.valor - a.valor;
+            return item1.name > item2.name ? -1 : 1;
           }
         } else {
           return 0;
@@ -49,6 +58,13 @@ export function ProductProvider({ children }) {
       }),
     [sort]
   );
+
+  const filteredProductList = useMemo(() => {
+    return sortedProductList
+      .filter((product) => product.valor >= filterMin || !filterMin)
+      .filter((product) => product.valor <= filterMax || !filterMax)
+      .filter((product) => product.name.includes(nome));
+  }, [sortedProductList, filterMin, filterMax, nome]);
 
   const addProduct = (product) => {
     const newCartList = [...cartList];
@@ -76,7 +92,14 @@ export function ProductProvider({ children }) {
   return (
     <ProductContext.Provider
       value={{
-        sortedProductList,
+        nome,
+        setNome,
+        filterMin,
+        filterMax,
+        setFilterMin,
+        setFilterMax,
+        filteredProductList,
+        productList,
         addProduct,
         sort,
         setSort,

@@ -2,7 +2,7 @@ import { useContext, useEffect, useMemo, useState } from "react";
 import { ProductContext } from "../contexts/ProductContext";
 
 export function Home() {
-  const { sortedProductList, addProduct, sort, setSort } =
+  const { addProduct, sort, setSort, filteredProductList } =
     useContext(ProductContext);
 
   return (
@@ -13,20 +13,21 @@ export function Home() {
           <p>Ordenação</p>
           <select
             onChange={(event) => setSort(event.target.value)}
-            valu
-            e={sort}
+            value={sort}
             name="option"
             id=""
           >
             <option value="">Selecione</option>
-            <option value="asc">Crescente</option>
-            <option value="desc">Decrescente</option>
+            <option value="asc">Preço Crescente</option>
+            <option value="desc">Preço Decrescente</option>
+            <option value="nome-asc">Nome Crescente</option>
+            <option value="nome-desc">Nome Decrescente</option>
           </select>
         </div>
       </div>
 
       <div className="list">
-        {sortedProductList.map((product) => {
+        {filteredProductList.map((product) => {
           const { name, valor } = product;
           return (
             <div className="productcard">
